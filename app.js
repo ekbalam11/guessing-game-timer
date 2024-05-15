@@ -12,6 +12,30 @@ let numGuesses = 1;
 let playGame = true;
 let remainingTime = 30;
 
+function decrementTime(){
+  //1. Decrementar la variable de estado 'remainingTime'
+  remainingTime--;
+  //2. actualizar el <span id="timer">
+  document.querySelector("#timer").textContent = remainingTime;
+  document.querySelector("#timer").style.color = "red";
+
+  if (remainingTime == 0) {
+    displayMessage("se ha acabao...");
+    endGame();
+    clearInterval(interval);
+  }
+
+
+}
+
+const interval = setInterval(decrementTime, 1000);
+
+// 3. Mirar si la variable de estado ha llegado a 0
+  // 3.1 Si es así, tenemos que mostrar un mensaje indicando que el tiempo se ha acabado. Buscad en el código, porque existe una función para hacer esto. Además, existe una función para indicar que el juego ha acabado: ejecutadla también. 3 líneas de código
+
+
+
+
 if (playGame) {
   subt.addEventListener('click', function (e) {
     e.preventDefault();
@@ -20,6 +44,8 @@ if (playGame) {
     validateGuess(guess);
   });
 }
+
+
 
 function validateGuess(guess) {
   if (isNaN(guess)) {
@@ -43,7 +69,13 @@ function validateGuess(guess) {
       checkGuess(guess);
     }
   }
+
+  if (numGuesses == 1) {
+    document.getElementById("#submit").textContent = "te queda un intento perro"
+  }
+
 }
+
 
 function checkGuess(guess) {
   //Display clue if guess is too high or too low
@@ -80,6 +112,8 @@ function endGame() {
   playGame = false;
   newGame();
 }
+
+
 
 function newGame() {
   const newGameButton = document.querySelector('#newGame');
